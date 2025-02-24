@@ -29,11 +29,11 @@ def temperature():
         response.raise_for_status()
         boxes = response.json()
     except requests.RequestException as e:
-        return jsonify({"error": f"Failed to fetch data: {str(e)}"}), 500   
+        return jsonify({"error": f"Failed to fetch data: {str(e)}"}), 500 
+    # Append temperature data for each box into list
     for box in boxes: 
         for sensor in box['sensors']:
             if sensor['title'] == "Temperatur":
-               print(sensor['lastMeasurement']['value'])
                temps.append(float(sensor['lastMeasurement']['value']))
 
     avg_temp = sum(temps) / len(temps)
