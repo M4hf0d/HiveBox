@@ -9,7 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read # Only needs to read the repository contents
     steps:
       # Checkout the repository
       - name: Checkout code
