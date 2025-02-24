@@ -10,8 +10,8 @@ def client():
         yield client
 
 
-def test_version_endpoint(client):
+def test_version_endpoint(test_client):
     """Test the /version endpoint returns correct version."""
-    response = client.get("/version")
+    response = test_client.get("/version")
     assert response.status_code == 200
     assert response.data.decode("utf-8") == "<p>v0.0.1</p>"
