@@ -26,7 +26,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install flake8  # For linting Python code
 
       # Lint Python code with flake8
       - name: Lint Python code
@@ -58,7 +57,7 @@ jobs:
       # Run Docker container and test /version endpoint
       - name: Test /version endpoint
         run: |
-          docker run -d -p 5000:5000 --name hivebox hivebox:0.0.2
+          docker run -d -p 5000:5000 --name hivebox hivebox:0.0.1
           sleep 5
           curl -f http://localhost:5000/version | grep '<p>v0.0.1</p>' || (echo "Version test failed" && exit 1)
 
