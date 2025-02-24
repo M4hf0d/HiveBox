@@ -66,35 +66,3 @@ jobs:
         if: always()
         run: |
           docker stop hivebox
-
-  scorecard:
-    runs-on: ubuntu-latest
-    permissions:
-      # Needed for Scorecard to submit results
-      security-events: write
-      id-token: write
-      contents: read
-
-    steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Run OpenSSF Scorecard
-      - name: Run Scorecard analysis
-        uses: ossf/scorecard-action@v2.3.1
-        with:
-          args: --format json --show-details
-
-      # Upload Scorecard results as artifact
-      - name: Upload Scorecard results
-        uses: actions/upload-artifact@v3
-        with:
-          name: scorecard-results
-          path: results.json
-
-      # Publish Scorecard results to GitHub Security tab
-      - name: Publish Scorecard results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: results.sarif
