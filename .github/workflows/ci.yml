@@ -66,3 +66,25 @@ jobs:
         if: always()
         run: |
           docker stop hivebox
+
+  scorecard:
+    runs-on: ubuntu-latest
+    permissions:
+      # Needed for uploading results
+      security-events: write
+      # Needed for private repository analysis
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Run OSSF Scorecard
+        uses: ossf/scorecard-action@v2.4.1
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
