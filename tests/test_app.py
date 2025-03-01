@@ -14,4 +14,4 @@ def test_version_endpoint(client):
     """Test the /version endpoint returns correct version."""
     response = client.get("/version")
     assert response.status_code == 200
-    assert response.data.decode("utf-8") == "<p>v0.0.1</p>"
+    assert response.data.decode("utf-8") == "<p>v0.0.3</p>"
