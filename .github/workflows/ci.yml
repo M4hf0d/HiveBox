@@ -60,13 +60,15 @@ jobs:
         run: |
           docker run -d -p 5000:5000 --name hivebox hivebox:0.0.1
           sleep 5
+          docker ps -a  
+          docker logs hivebox || true  # Capture logs from the container
           curl -f http://localhost:5000/version | grep '<p>v0.0.3</p>' || (echo "Version test failed" && exit 1)
 
       # Stop container
       - name: Stop container
         if: always()
         run: |
-          docker stop hivebox
+          docker stop hivebox || true
   scorecard:
     runs-on: ubuntu-latest
     permissions:
