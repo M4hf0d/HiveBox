@@ -1,6 +1,8 @@
+# - Frequent changes to the bottom of the Dockerfile
+# - Non Root user execution
+
 # Use an official Python runtime with pinned version as the base image
 FROM python:3.9.18-slim-bullseye
-
 
 # Create a non-root user
 RUN groupadd -r hivebox && useradd -r -g hivebox hivebox
